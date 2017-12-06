@@ -1,5 +1,152 @@
-[INFO  - 2017-12-04T13:58:33.575Z] GhostDriver - Main - running on port 57124
-[INFO  - 2017-12-04T13:58:34.681Z] Session [380b1210-d8fb-11e7-934f-5f9774f39635] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
-[INFO  - 2017-12-04T13:58:34.681Z] Session [380b1210-d8fb-11e7-934f-5f9774f39635] - page.customHeaders:  - {}
-[INFO  - 2017-12-04T13:58:34.681Z] Session [380b1210-d8fb-11e7-934f-5f9774f39635] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2017-12-04T13:58:34.681Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 380b1210-d8fb-11e7-934f-5f9774f39635
+[INFO  - 2017-12-06T07:18:06.256Z] GhostDriver - Main - running on port 58748
+[INFO  - 2017-12-06T07:18:09.802Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-12-06T07:18:09.802Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.customHeaders:  - {}
+[INFO  - 2017-12-06T07:18:09.802Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-12-06T07:18:09.802Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 9cec32d0-da55-11e7-abc9-f57c013e8203
+[ERROR - 2017-12-06T07:18:11.740Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:11.740Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13286&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:14.836Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:14.836Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13307&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:16.877Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:16.878Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=16027053&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:18.878Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:18.878Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13289&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:20.828Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:20.828Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13333&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:22.847Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:22.847Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13312&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:24.842Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:24.842Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=15060257&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:26.848Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:26.848Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13303&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:28.902Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:28.902Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13329&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:30.872Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:30.873Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=15060767&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:32.975Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:32.975Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=16027050&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:34.935Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:34.936Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13268&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:36.922Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:36.923Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13339&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:38.829Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:38.829Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13245&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:40.837Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:40.837Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13239&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:42.792Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:42.793Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13237&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:44.733Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:44.733Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13264&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:46.831Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:46.831Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13306&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:48.783Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:48.783Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13317&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:51.828Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:51.829Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=16027051&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:53.771Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - msg: TypeError: undefined is not an object (evaluating 'form.par_craft_index')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-12-06T07:18:53.771Z] Session [9cec32d0-da55-11e7-abc9-f57c013e8203] - page.onError - stack:
+  global code (http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml?endTime=2017-12-06&craft_index=13351&keyword=&startTime=2017-12-06&par_p_index=&p_index=&par_craft_index=13079:483)
+
+  phantomjs://platform/console++.js:263 in error

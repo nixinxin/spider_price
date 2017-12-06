@@ -8,8 +8,15 @@ import os
 import json
 import requests
 import datetime
+
+import sys
 from pyquery import PyQuery as pq
 from fake_useragent import UserAgent
+from urllib.parse import urlencode
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
 
 host = "127.0.0.1"
 password = '123456'
@@ -18,6 +25,10 @@ table = "农产品价格行情数据库"
 
 Basepath = os.path.dirname(__file__)
 index_path = os.path.join(Basepath, "index.json")
+if sys.platform == 'win32':
+    driver_path = os.path.join(Basepath, "selenium", "phantomjs-2.1.1-windows", "bin", "phantomjs.exe")
+else:
+    driver_path = os.path.join(Basepath, "selenium", "phantomjs-2.1.1-linux-x86_64", "bin", "phantomjs")
 
 conn = pymysql.connect(host, 'root', password, db, charset="utf8", use_unicode=True)
 cursor = conn.cursor()
@@ -34,7 +45,7 @@ category_code = {
 
 insert_sql = """
            INSERT INTO `myprojects`.`{table}`(`category`, `product`, `price`, `market`, `datetime`)
-           VALUES (%s, %s,%s, %s, %s) ON DUPLICATE KEY UPDATE price=VALUES(price)""".format(table=table)
+           VALUES (%s, %s,%s, %s, %s) ON DUPLICATE KEY UPDATE product=VALUES (`product`)""".format(table=table)
 
 index = json.loads(open(index_path, 'r', encoding='utf-8').read())
 
@@ -45,14 +56,26 @@ def down(url, parse):
         'cache-control': "no-cache",
         'User-Agent': getattr(UserAgent(), 'random')
     }
-    res = requests.request("GET", url, headers=header, params=parse)
-    flag = int(res.status_code)
     tiaoshu = 0
-    responses = pq(res.text)
+    try:
+        res = requests.request("GET", url, headers=header, params=parse)
+        url = res.url
+        flag = int(res.status_code)
+        responses = pq(res.text)
+    except:
+        driver = webdriver.PhantomJS(executable_path=driver_path)
+        driver.get(url)
+        flag = 200
+        wait = WebDriverWait(driver, 30)
+        wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, "div.pmCon > table > tbody > tr")))
+        responses = driver.page_source
+        responses = pq(responses)
     tables = responses.find("div.pmCon > table > tbody > tr")
     for items in tables.items():
         items_value = [category_code[code], ]
         for value in items.find('td').text().split(" "):
+            if value == '�|鱼':
+                value = "鮸鱼"
             items_value.append(value)
         items_value[2] = float(items_value[2])
         feedback = cursor.execute(insert_sql, items_value)
@@ -69,7 +92,9 @@ def main(arg):
     try:
         num = 0
         today = str(datetime.date.today())
+        driver = webdriver.PhantomJS(executable_path=driver_path)
         for item in arg:
+            wait = WebDriverWait(driver, 30)
             category_id = item['id']
             for product in item['sub_value'].keys():
                 product_id = item['sub_value'][product]
@@ -81,26 +106,27 @@ def main(arg):
                                "p_index": "",
                                "keyword": ""
                                }
-
-                headers = {
-                    'cache-control': "no-cache",
-                    'User-Agent': getattr(UserAgent(), 'random')
-                }
-                response = requests.request("GET", start_url, headers=headers, params=querystring)
-                all_page = re.compile(""".*var v_PageCount = (\d*);.*""").findall(response.text)
-                cont = [i for i in pq(response.text).find(""".s_table03 > tbody:nth-child(2) > tr""").items()]
-                if len(all_page) > 1:
-                    all_page = all_page[-2]
-                elif len(cont) == 1:
-                    all_page = 1
-                else:
+                parses = urlencode(querystring)
+                url = start_url + "?" + parses
+                try:
+                    driver.get(url)
+                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page2")))
+                except:
+                    driver = webdriver.PhantomJS(executable_path=driver_path)
+                    driver.get(url)
+                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page2")))
+                    driver.quit()
+                all_page = re.compile(".*?(\d+).*?").findall(driver.find_element_by_css_selector(".new_page2").text)[-1]
+                cont = driver.find_element_by_css_selector(".s_table03 tbody").text
+                if len(cont) == 0:
                     all_page = 0
+                num += 1
+                print(num, product, all_page)
                 for i in range(1, int(all_page) + 1):
                     querystring['page'] = str(i)
-                    result = down(start_url, querystring)
-                    num += 1
-                    print(num, result[0], result[1], item["product"], product, i, all_page)
-                print(product, all_page)
+                    results = down(start_url, querystring)
+                    print(product, item["product"], num, results[0], results[1], i, all_page)
+        driver.quit()
         return True
     except Exception as e:
         print(e)
@@ -109,13 +135,15 @@ def main(arg):
 
 if __name__ == '__main__':
     while True:
-        hour = int(str(datetime.datetime.today()).split(" ")[1].split(":")[0])
-        minute = str(datetime.datetime.today()).split(" ")[1].split(":")[1]
+        todays = str(datetime.datetime.today()).split(" ")[1].split(":")
+        hour = int(todays[0])
+        minute = todays[1]
         print(datetime.datetime.today())
-        if hour in range(12, 25) and minute == "00":
+        if hour in range(14, 25):
             start_time = datetime.datetime.today()
             result = main(index)
             if result:
                 break
     haoshi = datetime.datetime.today() - start_time
     print(haoshi)
+
