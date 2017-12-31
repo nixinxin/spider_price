@@ -20,7 +20,7 @@ from selenium.webdriver.support import expected_conditions as ec
 
 host = "127.0.0.1"
 password = '123456'
-db = "myprojects"
+db = "chartsite"
 table = "农产品价格行情数据库"
 
 Basepath = os.path.dirname(__file__)
@@ -33,7 +33,7 @@ else:
 conn = pymysql.connect(host, 'root', password, db, charset="utf8", use_unicode=True)
 cursor = conn.cursor()
 
-start_url = 'http://nc.mofcom.gov.cn/channel/gxdj/jghq/jg_list.shtml'
+start_url = 'http://nc.mofcom.gov.cn/channel/jghq2017/price_list.shtml'
 
 category_code = {
     "13079": "畜产品",
@@ -44,10 +44,12 @@ category_code = {
 }
 
 insert_sql = """
-           INSERT INTO `myprojects`.`{table}`(`category`, `product`, `price`, `market`, `datetime`)
-           VALUES (%s, %s,%s, %s, %s) ON DUPLICATE KEY UPDATE product=VALUES (`product`)""".format(table=table)
+           INSERT INTO `{db}`.`{table}`(`类别`, `日期`, `产品`, `价格`, `市场`)
+           VALUES (%s, %s,%s, %s, %s) ON DUPLICATE KEY UPDATE `产品`=VALUES (`产品`)""".format(table=table, db=db)
 
 index = json.loads(open(index_path, 'r', encoding='utf-8').read())
+
+f = open('record.txt', 'a+', encoding='utf-8')
 
 
 def down(url, parse):
@@ -67,22 +69,26 @@ def down(url, parse):
         driver.get(url)
         flag = 200
         wait = WebDriverWait(driver, 30)
-        wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, "div.pmCon > table > tbody > tr")))
+        wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".table-01.mt30 tbody tr")))
         responses = driver.page_source
         responses = pq(responses)
-    tables = responses.find("div.pmCon > table > tbody > tr")
-    for items in tables.items():
-        items_value = [category_code[code], ]
-        for value in items.find('td').text().split(" "):
-            if value == '�|鱼':
-                value = "鮸鱼"
-            items_value.append(value)
-        items_value[2] = float(items_value[2])
-        feedback = cursor.execute(insert_sql, items_value)
-        print(feedback, items_value)
-        conn.commit()
-        if feedback or not feedback:
-            tiaoshu += 1
+    tables = responses.find(".table-01.mt30 tr").items()
+    aa = 0
+    for items in tables:
+        aa += 1
+        if aa > 1:
+            items_value = [category_code[code], ]
+            for value in items.find('td').text().split(" "):
+                if value == '�|鱼':
+                    value = "鮸鱼"
+                items_value.append(value)
+            if "元/公斤" in items_value:
+                items_value.remove("元/公斤")
+            feedback = cursor.execute(insert_sql, items_value)
+            print(feedback, items_value)
+            conn.commit()
+            if feedback or not feedback:
+                tiaoshu += 1
     huifu = [flag, tiaoshu]
     time.sleep(random.randint(0, 5))
     return huifu
@@ -92,16 +98,18 @@ def main(arg):
     try:
         num = 0
         today = str(datetime.date.today())
-        driver = webdriver.PhantomJS(executable_path=driver_path)
-        for item in arg:
+        # driver = webdriver.PhantomJS(executable_path=driver_path)
+        driver = webdriver.Firefox()
+        for item in arg[1:]:
             wait = WebDriverWait(driver, 30)
             category_id = item['id']
             for product in item['sub_value'].keys():
+                num += 1
                 product_id = item['sub_value'][product]
                 querystring = {"par_craft_index": category_id,
+                               "craft_index": product_id,
                                "startTime": today,
                                "endTime": today,
-                               "craft_index": product_id,
                                "par_p_index": "",
                                "p_index": "",
                                "keyword": ""
@@ -110,22 +118,22 @@ def main(arg):
                 url = start_url + "?" + parses
                 try:
                     driver.get(url)
-                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page2")))
+                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page4")))
                 except:
                     driver = webdriver.PhantomJS(executable_path=driver_path)
                     driver.get(url)
-                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page2")))
+                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page4")))
                     driver.quit()
-                all_page = re.compile(".*?(\d+).*?").findall(driver.find_element_by_css_selector(".new_page2").text)[-1]
-                cont = driver.find_element_by_css_selector(".s_table03 tbody").text
-                if len(cont) == 0:
+                all_page = re.compile(".*?(\d+).*?").findall(driver.find_element_by_css_selector(".new_page4").text)[-1]
+                cont = driver.find_element_by_css_selector(".table-01.mt30 tbody").text
+                if len(cont) == 0 or cont == '日期 产品 价格 市场 走势':
                     all_page = 0
-                num += 1
                 print(num, product, all_page)
                 for i in range(1, int(all_page) + 1):
                     querystring['page'] = str(i)
                     results = down(start_url, querystring)
                     print(product, item["product"], num, results[0], results[1], i, all_page)
+                    f.write(" ".join([product, item["product"], str(num), str(results[0]), str(results[1]), str(i), str(all_page) + '\n']))
         driver.quit()
         return True
     except Exception as e:
@@ -139,11 +147,13 @@ if __name__ == '__main__':
         hour = int(todays[0])
         minute = todays[1]
         print(datetime.datetime.today())
-        if hour in range(14, 25):
+        if hour in range(9, 25):
             start_time = datetime.datetime.today()
             result = main(index)
             if result:
                 break
     haoshi = datetime.datetime.today() - start_time
     print(haoshi)
+
+
 
