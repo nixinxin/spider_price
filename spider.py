@@ -98,9 +98,9 @@ def main(arg):
     try:
         num = 0
         today = str(datetime.date.today())
-        # driver = webdriver.PhantomJS(executable_path=driver_path)
-        driver = webdriver.Firefox()
-        for item in arg[1:]:
+        driver = webdriver.PhantomJS(executable_path=driver_path)
+        # driver = webdriver.Firefox()
+        for item in arg:
             wait = WebDriverWait(driver, 30)
             category_id = item['id']
             for product in item['sub_value'].keys():
@@ -108,8 +108,8 @@ def main(arg):
                 product_id = item['sub_value'][product]
                 querystring = {"par_craft_index": category_id,
                                "craft_index": product_id,
-                               "startTime": today,
-                               "endTime": today,
+                               "startTime": '2017-12-20',
+                               "endTime": '2017-12-30',
                                "par_p_index": "",
                                "p_index": "",
                                "keyword": ""
