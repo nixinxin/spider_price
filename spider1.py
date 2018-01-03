@@ -109,8 +109,8 @@ def main(arg):
                 product_id = item['sub_value'][product]
                 querystring = {"par_craft_index": category_id,
                                "craft_index": product_id,
-                               "startTime": '2017-12-19',
-                               "endTime": '2017-12-25',
+                               "startTime": '2017-12-26',
+                               "endTime": '2017-12-30',
                                "par_p_index": "",
                                "p_index": "",
                                "keyword": ""
