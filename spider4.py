@@ -101,10 +101,10 @@ def main(arg):
     try:
         num = 0
         today = datetime.date.today()
-        start_day = today - datetime.timedelta(days=0)
-        # driver = webdriver.PhantomJS(executable_path=driver_path)
-        driver = webdriver.Chrome()
-        for item in arg[1:2]:
+        start_day = today - datetime.timedelta(days=20)
+        driver = webdriver.PhantomJS(executable_path=driver_path)
+        # driver = webdriver.Chrome()
+        for item in arg[4:5]:
             wait = WebDriverWait(driver, 30)
             category_id = item['id']
             for product in item['sub_value'].keys():

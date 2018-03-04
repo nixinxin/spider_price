@@ -67,6 +67,7 @@ def down(url, parse):
     except:
         driver = webdriver.PhantomJS(executable_path=driver_path)
         driver.get(url)
+        time.sleep(0.5)
         flag = 200
         wait = WebDriverWait(driver, 30)
         wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".table-01.mt30 tbody tr")))
@@ -81,6 +82,8 @@ def down(url, parse):
             for value in items.find('td').text().split(" "):
                 if value == '�|鱼':
                     value = "鮸鱼"
+                if value == '�崭�':
+                    value = "椪柑"
                 items_value.append(value)
             if len(items_value) >= 6:
                 if '/' in items_value[4]:
@@ -91,50 +94,52 @@ def down(url, parse):
             if feedback or not feedback:
                 tiaoshu += 1
     huifu = [flag, tiaoshu]
-    time.sleep(random.randint(0, 5))
     return huifu
 
 
 def main(arg):
     try:
         num = 0
-        today = str(datetime.date.today())
+        today = datetime.date.today()
+        today = today - datetime.timedelta(days=37)
+        start_day = today - datetime.timedelta(days=90)
         driver = webdriver.PhantomJS(executable_path=driver_path)
-        # driver = webdriver.Firefox()
         for item in arg:
             wait = WebDriverWait(driver, 30)
             category_id = item['id']
             for product in item['sub_value'].keys():
                 num += 1
-                product_id = item['sub_value'][product]
-                querystring = {"par_craft_index": category_id,
-                               "craft_index": product_id,
-                               "startTime": '2017-12-19',
-                               "endTime": '2017-12-25',
-                               "par_p_index": "",
-                               "p_index": "",
-                               "keyword": ""
-                               }
-                parses = urlencode(querystring)
-                url = start_url + "?" + parses
-                try:
-                    driver.get(url)
-                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page4")))
-                except:
-                    driver = webdriver.PhantomJS(executable_path=driver_path)
-                    driver.get(url)
-                    wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page4")))
-                    driver.quit()
-                all_page = re.compile(".*?(\d+).*?").findall(driver.find_element_by_css_selector(".new_page4").text)[-1]
-                cont = driver.find_element_by_css_selector(".table-01.mt30 tbody").text
-                if len(cont) == 0 or cont == '日期 产品 价格 市场 走势':
-                    all_page = 0
-                print(num, product, all_page)
-                for i in range(1, int(all_page) + 1):
-                    querystring['page'] = str(i)
-                    results = down(start_url, querystring)
-                    print(product, item["product"], num, results[0], results[1], i, all_page)
-                    f.write(" ".join([product, item["product"], str(num), str(results[0]), str(results[1]), str(i), str(all_page) + '\n']))
+                if num > 0:
+                    product_id = item['sub_value'][product]
+                    querystring = {"par_craft_index": category_id,
+                                   "craft_index": product_id,
+                                   "startTime": start_day,
+                                   "endTime": today,
+                                   "par_p_index": "",
+                                   "p_index": "",
+                                   "keyword": ""
+                                   }
+                    parses = urlencode(querystring)
+                    url = start_url + "?" + parses
+                    try:
+                        driver.get(url)
+                        wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page4")))
+                    except:
+                        driver = webdriver.PhantomJS(executable_path=driver_path)
+                        driver.get(url)
+                        wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, ".new_page4")))
+                        driver.quit()
+                    all_page = re.compile(".*?(\d+).*?").findall(driver.find_element_by_css_selector(".new_page4").text)[-1]
+                    cont = driver.find_element_by_css_selector(".table-01.mt30 tbody").text
+                    if len(cont) == 0 or cont == '日期 产品 价格 市场 走势':
+                        all_page = 0
+                    print(num, product, all_page)
+                    for i in range(1, int(all_page) + 1):
+                        time.sleep(0.51)
+                        querystring['page'] = str(i)
+                        results = down(start_url, querystring)
+                        print(product, item["product"], num, results[0], results[1], i, all_page)
+                        f.write(" ".join([product, item["product"], str(num), str(results[0]), str(results[1]), str(i), str(all_page) + '\n']))
         driver.quit()
         return True
     except Exception as e:
@@ -148,11 +153,10 @@ if __name__ == '__main__':
         hour = int(todays[0])
         minute = todays[1]
         print(datetime.datetime.today())
-        if hour in range(9, 25):
-            start_time = datetime.datetime.today()
-            result = main(index)
-            if result:
-                break
+        start_time = datetime.datetime.today()
+        result = main(index)
+        if result:
+            break
     haoshi = datetime.datetime.today() - start_time
     print(haoshi)
 

@@ -101,14 +101,15 @@ def main(arg):
     try:
         num = 0
         today = datetime.date.today()
-        start_day = today - datetime.timedelta(days=0)
+        start_day = today - datetime.timedelta(days=20)
         # driver = webdriver.PhantomJS(executable_path=driver_path)
         driver = webdriver.Chrome()
-        for item in arg[1:2]:
+        for item in arg[3:4]:
             wait = WebDriverWait(driver, 30)
             category_id = item['id']
             for product in item['sub_value'].keys():
                 num += 1
+                time.sleep(1)
                 if num > 0:
                     product_id = item['sub_value'][product]
                     querystring = {"par_craft_index": category_id,
@@ -135,6 +136,7 @@ def main(arg):
                         all_page = 0
                     print(num, product, all_page)
                     for i in range(1, int(all_page) + 1):
+                        time.sleep(0.5)
                         querystring['page'] = str(i)
                         results = down(start_url, querystring)
                         print(product, item["product"], num, results[0], results[1], i, all_page)
